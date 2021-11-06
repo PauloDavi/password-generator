@@ -14,7 +14,7 @@ export function Header({ createPassword }: HeaderProps) {
   const { colorMode } = useColorMode();
 
   return (
-    <HStack spacing="4" justify="space-between" align="center">
+    <HStack as="header" spacing="4" justify="space-between" align="center">
       <IconButton
         onClick={toggleColorMode}
         variant="solid"

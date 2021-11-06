@@ -1,5 +1,6 @@
+import { Flex } from '@chakra-ui/layout';
 import type { NextPage } from 'next';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 
 import { Container } from '../components/Container';
 import { Header } from '../components/Header';
@@ -12,18 +13,19 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Gerador de senhas</title>
-        <meta name="description" content="Gerador de senha configuravel criado em nextJS" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <NextSeo
+        title="Gerador de senhas"
+        description="Gerador de senha configuravel criado em nextJS"
+      />
 
       <Container>
         <Header createPassword={createPassword} />
 
-        <SlidersSettings />
+        <Flex flexDirection="column" as="main">
+          <SlidersSettings />
 
-        <ShowPassword value={value} />
+          <ShowPassword value={value} />
+        </Flex>
       </Container>
     </>
   );

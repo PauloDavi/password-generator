@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { VStack } from '@chakra-ui/layout';
 
 import { useHome } from '../contexts/HomeContext';
@@ -13,11 +15,26 @@ export function SlidersSettings() {
     setNumberOfNumbers,
   } = useHome();
 
+  const charactersMin = useMemo(
+    () => Math.max(numberOfNumbers + numberOfSymbols, 6),
+    [numberOfNumbers, numberOfSymbols]
+  );
+
+  const symbolsMax = useMemo(
+    () => numberOfCharacters - numberOfNumbers,
+    [numberOfCharacters, numberOfNumbers]
+  );
+
+  const numbersMax = useMemo(
+    () => numberOfCharacters - numberOfSymbols,
+    [numberOfCharacters, numberOfSymbols]
+  );
+
   return (
     <VStack spacing="6" mt="8">
       <CustomSlider
         label="N° de Caracteres"
-        min={Math.max(numberOfNumbers + numberOfSymbols, 6)}
+        min={charactersMin}
         max={40}
         value={numberOfCharacters}
         onChange={(value) => setNumberOfCharacters(value)}
@@ -25,14 +42,14 @@ export function SlidersSettings() {
 
       <CustomSlider
         label="N° de Simbolos"
-        max={numberOfCharacters - numberOfNumbers}
+        max={symbolsMax}
         value={numberOfSymbols}
         onChange={(value) => setNumberOfSymbols(value)}
       />
 
       <CustomSlider
         label="N° de Algarismos"
-        max={numberOfCharacters - numberOfSymbols}
+        max={numbersMax}
         value={numberOfNumbers}
         onChange={(value) => setNumberOfNumbers(value)}
       />
